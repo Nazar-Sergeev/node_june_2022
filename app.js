@@ -3,9 +3,7 @@ const fs = require('fs');
 fs.readdir('./boys', (err, files) => {
     for (const file of files) {
         fs.stat(`./boys/${file}`, (err, stats) => {
-            if (err) {
-                console.log(err);
-            } else if (stats.isFile()) {
+           if (stats.isFile()) {
                 fs.readFile(`./boys/${file}`, (err, data) => {
                     const peoples = JSON.parse(data);
                     if (peoples.gender === 'female') {
@@ -14,7 +12,9 @@ fs.readdir('./boys', (err, files) => {
                         });
                     }
                 });
-            }
+            }else {
+               console.log(err);
+           }
 
         });
     }
@@ -23,9 +23,7 @@ fs.readdir('./boys', (err, files) => {
 fs.readdir('./girls', (err, files) => {
     for (const file of files) {
         fs.stat(`./girls/${file}`, (err, stats) => {
-            if (err) {
-                console.log(err);
-            } else if (stats.isFile()) {
+           if (stats.isFile()) {
                 fs.readFile(`./girls/${file}`, (err, data) => {
                     const users = JSON.parse(data);
                     console.log(users);
@@ -35,7 +33,9 @@ fs.readdir('./girls', (err, files) => {
                         });
                     }
                 });
-            }
+            }else {
+               console.log(err);
+           }
         });
     }
 });
