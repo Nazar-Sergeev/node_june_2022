@@ -26,7 +26,6 @@ fs.readdir('./girls', (err, files) => {
            if (stats.isFile()) {
                 fs.readFile(`./girls/${file}`, (err, data) => {
                     const users = JSON.parse(data);
-                    console.log(users);
                     if (users.gender === 'male') {
                         fs.rename(`./girls/${file}`, `./boys/${file}`, (err) => {
                             console.log(err);
