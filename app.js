@@ -163,6 +163,20 @@ app.put('/users/:userId', async (req, res) => {
 
 });
 
+app.delete('/users/:userId', async (req, res) => {
+    const {userId} = req.params;
+
+    const buffer = await fs.readFile(path.join(__dirname, 'db', 'usersDb.json'));
+    const users = JSON.parse(buffer.toString());
+    const index = users.findIndex((u) => u.id === +userId);
+
+    users.splice(index, 1);
+    await fs.writeFile(path.join(__dirname, 'db', 'usersDb.json'), JSON.stringify(users));
+
+    res.sendStatus(204);
+
+});
+
 
 const port = 5000;
 app.listen(port, () => {
