@@ -43,7 +43,7 @@
 //     } else if (!userInfo.name) {
 //         res.status(401).json(`Please enter the name user!`)
 //     } else if (userInfo.name.length < 2) {
-//         res.status(401).json(`Please enter the name user where length name more than two letters!`)
+//         res.status(401).json(`Please enter the name user where length name more than two constters!`)
 //     } else if (!userInfo.age) {
 //         res.status(401).json(`Please enter the age user!`);
 //     } else if (userInfo.age < 18) {
@@ -64,7 +64,7 @@
 //     } else if (!updatedUser.name) {
 //         res.status(401).json(`Please enter the name user!`)
 //     } else if (updatedUser.name.length < 2) {
-//         res.status(401).json(`Please enter the name user where length name more than two letters!`)
+//         res.status(401).json(`Please enter the name user where length name more than two constters!`)
 //     } else if (!updatedUser.age) {
 //         res.status(401).json(`Please enter the age user!`);
 //     } else if (updatedUser.age < 18) {
@@ -75,7 +75,7 @@
 //     res.json('Updated');
 // });
 //
-// app.delete('/users/:userId', (req, res) => {
+// app.deconste('/users/:userId', (req, res) => {
 //     const {userId} = req.params;
 //
 //     if (!userDb[userId]) {
@@ -85,7 +85,7 @@
 //     }
 //
 //     res.json(userDb);
-//     res.json('deleted');
+//     res.json('deconsted');
 // })
 //
 //
@@ -163,7 +163,7 @@
 //
 // });
 //
-// app.delete('/users/:userId', async (req, res) => {
+// app.deconste('/users/:userId', async (req, res) => {
 //     const {userId} = req.params;
 //
 //     const buffer = await fs.readFile(path.join(__dirname, 'db', 'usersDb.json'));
@@ -255,10 +255,88 @@
 //     res.json(data);
 // });
 
+// const express = require('express');
+// const fs = require('fs/promises');
+// const path = require('path');
 //
+// const app = express();
+//
+// app.use(express.json())
+// app.use(express.urlencoded({extended: true}))
+//
+// app.get('/users', async (req, res) => {
+//     const pathFile = path.join(__dirname, 'db', 'usersDb.json');
+//
+//     const buffer = await fs.readFile(pathFile);
+//     const data = JSON.parse(buffer.toString());
+//
+//     res.json(data);
+//
+// });
+//
+// app.get('/users/:userId', async (req, res) => {
+//     const {userId} = req.params;
+//     const pathFile = path.join(__dirname, 'db', 'usersDb.json');
+//
+//     const buffer = await fs.readFile(pathFile);
+//     const data = JSON.parse(buffer.toString());
+//     const user = data.find((u) => u.id === +userId);
+//
+//     res.json(user);
+//
+// });
+//
+// app.post('/users', async (req, res) => {
+//     const userInfo = req.body;
+//     const pathFile = path.join(__dirname, 'db', 'usersDb.json');
+//
+//     const buffer = await fs.readFile(pathFile);
+//     const data = JSON.parse(buffer.toString());
+//
+//     const newUser = {...userInfo, id: data[data.length - 1].id + 1};
+//     data.push(newUser);
+//
+//     await fs.writeFile(pathFile, JSON.stringify(data));
+//
+//     res.json(data);
+//
+// });
+//
+// app.put('/users/:userId', async (req, res) => {
+//     const {userId} = req.params;
+//     const newUserInfo = req.body;
+//     const pathFile = path.join(__dirname, 'db', 'usersDb.json');
+//
+//     const buffer = await fs.readFile(pathFile);
+//     const data = JSON.parse(buffer.toString());
+//
+//     const index = data.findIndex((u) => u.id === +userId);
+//
+//     data[index] = {...data[index], ...newUserInfo};
+//     await fs.writeFile(pathFile, JSON.stringify(data));
+//
+//     res.json(data);
+//
+// });
+//
+// app.delete('/users/:userId', async (req, res) => {
+//     const {userId} = req.params;
+//     const pathFile = path.join(__dirname, 'db', 'usersDb.json');
+//
+//     const buffer = await fs.readFile(pathFile);
+//     const data = JSON.parse(buffer.toString());
+//
+//     const index = data.findIndex((u) => u.id === +userId);
+//
+//     data.splice(index, 1);
+//     await fs.writeFile(pathFile, JSON.stringify(data));
+//
+//     res.json(data);
+// });
+
+
 // const port = 5000;
 // app.listen(port, () => {
 //     console.log(`Server listen ${port}`);
 // });
-
 
