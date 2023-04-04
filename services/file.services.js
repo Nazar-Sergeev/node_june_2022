@@ -8,8 +8,7 @@ module.exports = {
         const buffer = await fs.readFile(pathFile);
         return JSON.parse(buffer.toString());
     },
-
-    writer: async (users) => {
-        return await fs.writeFile(pathFile, JSON.stringify(users));
+    writer: async (data) => {
+        await fs.writeFile(pathFile, JSON.stringify(data))
     },
 }
