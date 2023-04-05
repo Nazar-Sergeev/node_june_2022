@@ -10,6 +10,14 @@ app.use(express.urlencoded({extended: true}));
 
 app.use('/users', userRouter);
 
-app.listen(process.env.PORT , () => {
+app.use((err, req, res, next) => {
+    res.status(err.status || 500).json({
+            message: err.message || 'Unknown error!!',
+            status: err.status || 500
+        }
+    )
+});
+
+app.listen(process.env.PORT, () => {
     console.log(`Server listen ${process.env.PORT}`);
 });
